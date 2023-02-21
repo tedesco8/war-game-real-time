@@ -1,6 +1,6 @@
 module.exports = {
   AuthRoutes: require("./auth.routes"),
   EncryptionRoutes: require("./encryption.routes"),
-  ClientRoutes: require("./client.routes"),
+  GameRoutes: require("./game.routes"),
   UserRoutes: require("./user.routes"),
 };

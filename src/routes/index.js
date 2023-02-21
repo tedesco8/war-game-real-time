@@ -11,7 +11,7 @@ const swaggerUI = require("swagger-ui-express");
 const { SWAGGER_PATH } = require("../config");
 const swaggerDocument = require(SWAGGER_PATH);
 
-module.exports = function ({ AuthRoutes, EncryptionRoutes, UserRoutes, ClientRoutes }) {
+module.exports = function ({ AuthRoutes, EncryptionRoutes, UserRoutes, GameRoutes }) {
   const router = express.Router();
   const apiRoutes = express.Router();
 
@@ -20,7 +20,7 @@ module.exports = function ({ AuthRoutes, EncryptionRoutes, UserRoutes, ClientRou
   apiRoutes.use("/auth", express.json(), AuthRoutes);
   apiRoutes.use("/encryption", express.json(), EncryptionRoutes);
   apiRoutes.use("/user", express.json(), UserRoutes);
-  apiRoutes.use("/client", express.json(), ClientRoutes);
+  apiRoutes.use("/game", express.json(), GameRoutes);
 
   router.use("/v2/api", apiRoutes);
   router.use("/api-docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument));

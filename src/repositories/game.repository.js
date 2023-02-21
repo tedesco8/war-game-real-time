@@ -1,14 +1,14 @@
 const BaseRepository = require("./base.repository");
-let _client = null;
+let _game = null;
 
-class ClientRepository extends BaseRepository {
-  constructor({ ClientModel }) {
-    super(ClientModel);
-    _client = ClientModel;
+class GameRepository extends BaseRepository {
+  constructor({ GameModel }) {
+    super(GameModel);
+    _game = GameModel;
   }
 
   async get(id) {
-    return await _client.findOne({
+    return await _game.findOne({
       where: { id },
       attributes: {
         exclude: ["password", "tokenChangePassword"],
@@ -18,7 +18,7 @@ class ClientRepository extends BaseRepository {
 
 
   async getAll() {
-    return await _client.findAll({
+    return await _game.findAll({
       attributes: {
         exclude: ["password", "tokenChangePassword"],
       },
@@ -26,7 +26,7 @@ class ClientRepository extends BaseRepository {
   }
 
   async getByUsername(userName) {
-    return await _client.findOne({
+    return await _game.findOne({
       where: { userName },
       attributes: {
         exclude: ["password", "tokenChangePassword"],
@@ -35,10 +35,10 @@ class ClientRepository extends BaseRepository {
   }
 
   async getByUsernameWithPassword(userName) {
-    return await _client.findOne({
+    return await _game.findOne({
       where: { userName }
     });
   }
 }
 
-module.exports = ClientRepository;
+module.exports = GameRepository;

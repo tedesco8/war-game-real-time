@@ -1,6 +1,5 @@
 const { createContainer, asClass, asValue, asFunction } = require("awilix");
 
-//  config
 const config = require("../config");
 
 const Transport = require("../config/email");
@@ -10,14 +9,14 @@ const app = require(".");
 const Routes = require("../routes");
 
 // routes
-const { AuthRoutes, EncryptionRoutes, UserRoutes, ClientRoutes } = require("../routes/index.routes");
+const { AuthRoutes, EncryptionRoutes, UserRoutes, GameRoutes } = require("../routes/index.routes");
 
 // controllers
 const {
   AuthController,
   EncryptionController,
   UserController,
-  ClientController,
+  GameController,
 } = require("../controllers");
 
 // services
@@ -27,14 +26,14 @@ const {
   EmailService,
   EncryptionService,
   UserService,
-  ClientService,
+  GameService,
 } = require("../services");
 
 // repositories
-const { UserRepository, ClientRepository } = require("../repositories");
+const { UserRepository, GameRepository } = require("../repositories");
 
 // models
-const { UserModel, ClientModel } = require("../models");
+const { UserModel, GameModel } = require("../models");
 
 const container = createContainer();
 
@@ -49,11 +48,11 @@ container
     AuthRoutes: asFunction(AuthRoutes).singleton(),
     EncryptionRoutes: asFunction(EncryptionRoutes).singleton(),
     UserRoutes: asFunction(UserRoutes).singleton(),
-    ClientRoutes: asFunction(ClientRoutes).singleton(),
+    GameRoutes: asFunction(GameRoutes).singleton(),
   })
   .register({
-    ClientController: asClass(
-      ClientController.bind(ClientController)
+    GameController: asClass(
+      GameController.bind(GameController)
     ).singleton(),
     AuthController: asClass(AuthController.bind(AuthController)).singleton(),
     EncryptionController: asClass(
@@ -67,14 +66,14 @@ container
     EmailService: asClass(EmailService).singleton(),
     EncryptionService: asClass(EncryptionService).singleton(),
     UserService: asClass(UserService).singleton(),
-    ClientService: asClass(ClientService).singleton(),
+    GameService: asClass(GameService).singleton(),
   })
   .register({
-    ClientRepository: asClass(ClientRepository).singleton(),
+    GameRepository: asClass(GameRepository).singleton(),
     UserRepository: asClass(UserRepository).singleton(),
   })
   .register({
-    ClientModel: asValue(ClientModel),
+    GameModel: asValue(GameModel),
     UserModel: asValue(UserModel),
   });
 

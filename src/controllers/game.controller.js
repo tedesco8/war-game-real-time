@@ -24,20 +24,20 @@ class GameController {
 
   async update(req, res) {
     const { body } = req;
-    const { clientId } = req.params;
-    const updatedClient = await _gameService.update(clientId, body);
-    return res.send(updatedClient);
+    const { id } = req.params;
+    const game = await _gameService.update(id, body);
+    return res.send(game);
   }
 
   async delete(req, res) {
-    const { clientId } = req.params;
-    const deletedClient = await _gameService.delete(clientId);
+    const { id } = req.params;
+    const deletedClient = await _gameService.delete(id);
     return res.send(deletedClient);
   }
 
   async getByUserName(req, res) {
-    const { clientName } = req.params;
-    const client = await _gameService.getByUserName(clientName);
+    const { userName } = req.params;
+    const client = await _gameService.getByUserName(userName);
     return res.send(client);
   }
 }
