@@ -1,0 +1,1875 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Backend ::Super GYM:: API",
+    "version": "1.0.0",
+    "title": "Swagger Super GYM Services"
+  },
+  "host": "https://super-gym-cms.tejo.uy/",
+  "basePath": "/v1/api",
+  "schemes": ["http", "https"],
+  "paths": {
+    "/auth/signin": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Login",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "object",
+            "in": "body",
+            "type": "object",
+            "description": "Objects",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Auth"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid tag value"
+          }
+        }
+      }
+    },
+    "/auth/decrypt": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Decrypt",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "object",
+            "in": "body",
+            "type": "object",
+            "description": "Objects",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Auth"
+              }
+            }
+          },
+          "400": {
+            "description": "Nothing to decrypt"
+          }
+        }
+      }
+    },
+    "/auth/encrypt": {
+      "post": {
+        "tags": ["Auth"],
+        "summary": "Encrypt",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "object",
+            "in": "body",
+            "type": "object",
+            "description": "Objects",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "string",
+              "items": {
+                "$ref": "#/definitions/Auth"
+              }
+            }
+          },
+          "400": {
+            "description": "Nothing to encrypt"
+          }
+        }
+      }
+    },
+    "/user": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Finds All the Users",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      },
+      "post": {
+        "tags": ["User"],
+        "summary": "Create User",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          },
+          "400": {
+            "description": "User already exist"
+          }
+        }
+      }
+    },
+    "/user/{id}": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Find one user",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "User Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          },
+          "404": {
+            "description": "entity does not found"
+          },
+          "400": {
+            "description": "id must be sent"
+          }
+        }
+      },
+      "patch": {
+        "tags": ["User"],
+        "summary": "Update one user",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "User Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          },
+          "400": {
+            "description": "id must be sent"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["User"],
+        "summary": "Delete one user",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "User Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization token with admin role",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "boolean",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          },
+          "400": {
+            "description": "id must be sent"
+          }
+        }
+      }
+    },
+    "/user/getByUsername/{name}": {
+      "get": {
+        "tags": ["User"],
+        "summary": "Find one user by Username",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "type": "string",
+            "description": "Username",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          },
+          "404": {
+            "description": "User does not exist"
+          }
+        }
+      }
+    },
+    "/category": {
+      "get": {
+        "tags": ["Category"],
+        "summary": "Find All the Categories",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Category"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Category"],
+        "summary": "Create Category",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Category"
+              }
+            }
+          },
+          "400": {
+            "description": "Category already exist"
+          }
+        }
+      }
+    },
+    "/category/{id}": {
+      "get": {
+        "tags": ["Category"],
+        "summary": "Find one category",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Category Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Category"
+              }
+            }
+          },
+          "404": {
+            "description": "entity does not found"
+          },
+          "400": {
+            "description": "id must be sent"
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Category"],
+        "summary": "Update one category",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "User Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Category"
+              }
+            }
+          },
+          "400": {
+            "description": "id must be sent"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Category"],
+        "summary": "Delete one category",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Category Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization token with admin role",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "boolean",
+              "items": {
+                "$ref": "#/definitions/Category"
+              }
+            }
+          },
+          "400": {
+            "description": "id must be sent"
+          }
+        }
+      }
+    },
+    "/category/getByName/{name}": {
+      "get": {
+        "tags": ["Category"],
+        "summary": "Find one category by name",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "type": "string",
+            "description": "Category Name",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Category"
+              }
+            }
+          },
+          "404": {
+            "description": "Category does not exist"
+          }
+        }
+      }
+    },
+    "/article": {
+      "get": {
+        "tags": ["Article"],
+        "summary": "Find All the Articles",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Article"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Article"],
+        "summary": "Create Article",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Article"
+              }
+            }
+          },
+          "400": {
+            "description": "Article already exist"
+          }
+        }
+      }
+    },
+    "/article/{id}": {
+      "get": {
+        "tags": ["Article"],
+        "summary": "Find one category",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Article Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Article"
+              }
+            }
+          },
+          "404": {
+            "description": "entity does not found"
+          },
+          "400": {
+            "description": "id must be sent"
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Article"],
+        "summary": "Update one article",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Article Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Article"
+              }
+            }
+          },
+          "400": {
+            "description": "id must be sent"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Article"],
+        "summary": "Delete one article",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Article Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization token with admin role",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "boolean",
+              "items": {
+                "$ref": "#/definitions/Article"
+              }
+            }
+          },
+          "400": {
+            "description": "id must be sent"
+          }
+        }
+      }
+    },
+    "/article/getByName/{name}": {
+      "get": {
+        "tags": ["Article"],
+        "summary": "Find one article by name",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "type": "string",
+            "description": "Article Name",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Article"
+              }
+            }
+          },
+          "404": {
+            "description": "Article does not exist"
+          }
+        }
+      }
+    },
+    "/brand": {
+      "get": {
+        "tags": ["Brand"],
+        "summary": "Find All the Brands",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Brand"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Brand"],
+        "summary": "Create Brand",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Brand"
+              }
+            }
+          },
+          "400": {
+            "description": "Brand already exist"
+          }
+        }
+      }
+    },
+    "/brand/{id}": {
+      "get": {
+        "tags": ["Brand"],
+        "summary": "Find one category",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Brand Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Brand"
+              }
+            }
+          },
+          "404": {
+            "description": "entity does not found"
+          },
+          "400": {
+            "description": "id must be sent"
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Brand"],
+        "summary": "Update one brand",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Brand Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Brand"
+              }
+            }
+          },
+          "400": {
+            "description": "id must be sent"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Brand"],
+        "summary": "Delete one article",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Brand Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization token with admin role",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "boolean",
+              "items": {
+                "$ref": "#/definitions/Brand"
+              }
+            }
+          },
+          "400": {
+            "description": "id must be sent"
+          }
+        }
+      }
+    },
+    "/brand/getByName/{name}": {
+      "get": {
+        "tags": ["Brand"],
+        "summary": "Find one brand by name",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "type": "string",
+            "description": "Brand Name",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Brand"
+              }
+            }
+          },
+          "404": {
+            "description": "Brand does not exist"
+          }
+        }
+      }
+    },
+    "/project": {
+      "get": {
+        "tags": ["Project"],
+        "summary": "Find All the Projects",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Project"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Project"],
+        "summary": "Create Project",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Project"
+              }
+            }
+          },
+          "400": {
+            "description": "Project already exist"
+          }
+        }
+      }
+    },
+    "/project/{id}": {
+      "get": {
+        "tags": ["Project"],
+        "summary": "Find one project",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Project Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Project"
+              }
+            }
+          },
+          "404": {
+            "description": "entity does not found"
+          },
+          "400": {
+            "description": "id must be sent"
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Project"],
+        "summary": "Update one project",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Project Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Project"
+              }
+            }
+          },
+          "400": {
+            "description": "id must be sent"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Project"],
+        "summary": "Delete one project",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Project Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization token with admin role",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "boolean",
+              "items": {
+                "$ref": "#/definitions/Project"
+              }
+            }
+          },
+          "400": {
+            "description": "id must be sent"
+          }
+        }
+      }
+    },
+    "/project/getByName/{name}": {
+      "get": {
+        "tags": ["Project"],
+        "summary": "Find one project by name",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "type": "string",
+            "description": "Project Name",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Project"
+              }
+            }
+          },
+          "404": {
+            "description": "Project does not exist"
+          }
+        }
+      }
+    },
+    "/tag": {
+      "get": {
+        "tags": ["Tag"],
+        "summary": "Find All the Tags",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Tag"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Tag"],
+        "summary": "Create Tag",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Tag"
+              }
+            }
+          },
+          "400": {
+            "description": "Tag already exist"
+          }
+        }
+      }
+    },
+    "/tag/{id}": {
+      "get": {
+        "tags": ["Tag"],
+        "summary": "Find one tag",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Tag Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Tag"
+              }
+            }
+          },
+          "404": {
+            "description": "entity does not found"
+          },
+          "400": {
+            "description": "id must be sent"
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Tag"],
+        "summary": "Update one tag",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Tag Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Tag"
+              }
+            }
+          },
+          "400": {
+            "description": "id must be sent"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Tag"],
+        "summary": "Delete one tag",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Tag Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization token with admin role",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "boolean",
+              "items": {
+                "$ref": "#/definitions/Tag"
+              }
+            }
+          },
+          "400": {
+            "description": "id must be sent"
+          }
+        }
+      }
+    },
+    "/page": {
+      "get": {
+        "tags": ["Page"],
+        "summary": "Find All the Pages",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Page"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Page"],
+        "summary": "Create Page",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Page"
+              }
+            }
+          },
+          "400": {
+            "description": "Page already exist"
+          }
+        }
+      }
+    },
+    "/page/{id}": {
+      "get": {
+        "tags": ["Page"],
+        "summary": "Find one page",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Page Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Page"
+              }
+            }
+          },
+          "404": {
+            "description": "entity does not found"
+          },
+          "400": {
+            "description": "id must be sent"
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Page"],
+        "summary": "Update one page",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Page Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Page"
+              }
+            }
+          },
+          "400": {
+            "description": "id must be sent"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Page"],
+        "summary": "Delete one Page",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "page Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization token with admin role",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "boolean",
+              "items": {
+                "$ref": "#/definitions/Page"
+              }
+            }
+          },
+          "400": {
+            "description": "id must be sent"
+          }
+        }
+      }
+    },
+    "/section": {
+      "get": {
+        "tags": ["Section"],
+        "summary": "Find All the sections",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Section"
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid status value"
+          }
+        }
+      },
+      "post": {
+        "tags": ["Section"],
+        "summary": "Create section",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Section"
+              }
+            }
+          },
+          "400": {
+            "description": "Section already exist"
+          }
+        }
+      }
+    },
+    "/section/{id}": {
+      "get": {
+        "tags": ["Section"],
+        "summary": "Find one section",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Section Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Section"
+              }
+            }
+          },
+          "404": {
+            "description": "entity does not found"
+          },
+          "400": {
+            "description": "id must be sent"
+          }
+        }
+      },
+      "patch": {
+        "tags": ["Section"],
+        "summary": "Update one section",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Section Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization header for JWT",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "object",
+              "items": {
+                "$ref": "#/definitions/Section"
+              }
+            }
+          },
+          "400": {
+            "description": "id must be sent"
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Section"],
+        "summary": "Delete one section",
+        "description": "",
+        "produces": ["application/json"],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "type": "string",
+            "description": "Section Id",
+            "required": true
+          },
+          {
+            "in": "header",
+            "name": "Authorization",
+            "description": "Authorization token with admin role",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "boolean",
+              "items": {
+                "$ref": "#/definitions/Section"
+              }
+            }
+          },
+          "400": {
+            "description": "id must be sent"
+          }
+        }
+      }
+    }
+
+  },
+  "definitions": {
+    "Auth": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "User": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "firstname": {
+          "type": "string"
+        },
+        "surname": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "role": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "status": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Category": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "UUID"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "published": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "Date"
+        },
+        "updatedAt": {
+          "type": "Date"
+        }
+      }
+    },
+    "Article": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "UUID"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "price": {
+          "type": "decimal"
+        },
+        "stock": {
+          "type": "integer"
+        },
+        "published": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "Date"
+        },
+        "updatedAt": {
+          "type": "Date"
+        }
+      }
+    },
+    "Brand": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "UUID"
+        },
+        "name": {
+          "type": "string"
+        },
+        "aditionalData": {
+          "type": "string"
+        },
+        "isoType": {
+          "type": "string"
+        },
+        "logoType": {
+          "type": "string"
+        },
+        "published": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "Date"
+        },
+        "updatedAt": {
+          "type": "Date"
+        }
+      }
+    },
+    "Project": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "UUID"
+        },
+        "name": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "published": {
+          "type": "string"
+        },
+        "createdAt": {
+          "type": "Date"
+        },
+        "updatedAt": {
+          "type": "Date"
+        }
+      }
+    },
+    "Tag": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "UUID"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "Image": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "UUID"
+        },
+        "url": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        },
+        "default": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "Date"
+        },
+        "updatedAt": {
+          "type": "Date"
+        }
+      }
+    },
+    "Page": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "UUID"
+        },
+        "name": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "subtitle": {
+          "type": "string"
+        },
+        "slug": {
+          "type": "string"
+        },
+        "published": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "Date"
+        },
+        "updatedAt": {
+          "type": "Date"
+        }
+      }
+    },
+    "Section": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "UUID"
+        },
+        "potition": {
+          "type": "integer"
+        },
+        "image": {
+          "type": "string"
+        },
+        "textContent": {
+          "type": "string"
+        },
+        "textColor": {
+          "type": "string"
+        },
+        "backgroundColor": {
+          "type": "string"
+        },
+        "published": {
+          "type": "boolean"
+        },
+        "createdAt": {
+          "type": "Date"
+        },
+        "updatedAt": {
+          "type": "Date"
+        }
+      }
+    }
+  }
+}
